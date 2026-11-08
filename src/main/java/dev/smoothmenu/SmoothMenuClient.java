@@ -2,16 +2,11 @@ package dev.smoothmenu;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
-import java.util.WeakHashMap;
 
 public class SmoothMenuClient implements ClientModInitializer {
     public static final String MOD_ID = "smoothmenu";
@@ -19,9 +14,6 @@ public class SmoothMenuClient implements ClientModInitializer {
 
     private static Screen lastScreen;
     private static long openedAt;
-    private static long lastFrame;
-
-    private static final Map<AbstractWidget, Float> HOVER = new WeakHashMap<>();
 
     @Override
     public void onInitializeClient() {
@@ -30,7 +22,7 @@ public class SmoothMenuClient implements ClientModInitializer {
             if (screen != lastScreen) {
                 lastScreen = screen;
                 openedAt = Util.getMillis();
-                HOVER.clear();
+                SmoothSounds.playOpen();
             }
 
             ScreenEvents.beforeRender(screen).register(SmoothMenuClient::beforeRender);
@@ -58,23 +50,6 @@ public class SmoothMenuClient implements ClientModInitializer {
 
     private static void afterRender(Screen screen, GuiGraphics g, int mouseX, int mouseY, float tickDelta) {
         g.pose().popPose();
-
-        long now = Util.getMillis();
-        float dt = lastFrame == 0 ? 0.016f : Math.min((now - lastFrame) / 1000f, 0.1f);
-        lastFrame = now;
-
-        // Плавная подсветка кнопок при наведении
-        for (AbstractWidget w : Screens.getButtons(screen)) {
-            if (!w.visible) continue;
-            float cur = HOVER.getOrDefault(w, 0f);
-            float target = (w.active && w.isHoveredOrFocused()) ? 1f : 0f;
-            cur = Easing.approach(cur, target, dt, AnimationConfig.BUTTON_HOVER_SPEED);
-            HOVER.put(w, cur);
-            int a = Math.round(cur * AnimationConfig.BUTTON_HOVER_ALPHA);
-            if (a > 0) {
-                g.fill(w.getX(), w.getY(), w.getX() + w.getWidth(), w.getY() + w.getHeight(), (a << 24) | 0xFFFFFF);
-            }
-        }
 
         // Плавное появление: затемнение исчезает
         float t = openProgress();

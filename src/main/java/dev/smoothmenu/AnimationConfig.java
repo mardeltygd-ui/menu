@@ -11,7 +11,9 @@ public final class AnimationConfig {
     /** Максимальная затемнённость в начале появления экрана (0..1). */
     public static final float SCREEN_START_DARKNESS = 0.55f;
 
-    /** Скорость подсветки кнопки при наведении (больше = быстрее). */
+    /** На сколько кнопка увеличивается при наведении (0.05 = на 5%). */
+    public static final float BUTTON_HOVER_SCALE = 0.05f;
+    /** Скорость увеличения и уменьшения кнопки (больше = быстрее). */
     public static final float BUTTON_HOVER_SPEED = 14f;
     /** Максимальная яркость подсветки кнопки (0..255). */
     public static final int BUTTON_HOVER_ALPHA = 46;
@@ -21,4 +23,13 @@ public final class AnimationConfig {
 
     /** Множитель длительности заставки Mojang (появление и затухание). */
     public static final float SPLASH_SLOWDOWN = 1.8f;
+
+    /** Включить звуки интерфейса. */
+    public static final boolean SOUNDS_ENABLED = true;
+    /** Звук наведения на кнопку. */
+    public static final float HOVER_SOUND_PITCH = 1.7f;
+    public static final float HOVER_SOUND_VOLUME = 0.25f;
+    /** Звук открытия экрана. */
+    public static final float OPEN_SOUND_PITCH = 0.75f;
+    public static final float OPEN_SOUND_VOLUME = 0.3f;
 }
