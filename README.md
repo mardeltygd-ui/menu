@@ -1,6 +1,6 @@
 # Smooth Menu
 
-Клиентский мод для Fabric (Minecraft 1.21.4), который добавляет плавные анимации.
+Клиентский мод для Fabric (Minecraft 1.20.1), который добавляет плавные анимации.
 
 ## Что делает
 
@@ -13,7 +13,7 @@
 
 ## Сборка
 
-Нужны Java 21 и Gradle.
+Нужны Java 17 и Gradle.
 
 ```
 gradle build
@@ -25,5 +25,5 @@ gradle build
 
 ## Установка
 
-1. Установите Fabric Loader для Minecraft 1.21.4.
+1. Установите Fabric Loader для Minecraft 1.20.1.
 2. Положите Fabric API и `smoothmenu-*.jar` в папку `mods`.

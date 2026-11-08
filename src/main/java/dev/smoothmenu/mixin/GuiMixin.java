@@ -17,13 +17,13 @@ public abstract class GuiMixin {
     private static long smoothmenu$last;
 
     @ModifyArg(
-        method = "renderItemHotbar",
+        method = "renderHotbar",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Ljava/util/function/Function;Lnet/minecraft/resources/ResourceLocation;IIII)V",
+            target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIIII)V",
             ordinal = 1
         ),
-        index = 2,
+        index = 1,
         require = 0
     )
     private int smoothmenu$slideSelection(int targetX) {
