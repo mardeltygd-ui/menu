@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "smoothmenu",
+  "version": "${version}",
+  "name": "Smooth Menu",
+  "description": "Плавные анимации: заставка Mojang, открытие и закрытие меню, наведение на кнопки, выбор слота хотбара.",
+  "authors": ["mardeltygd-ui"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.smoothmenu.SmoothMenuClient"]
+  },
+  "mixins": ["smoothmenu.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.4",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
